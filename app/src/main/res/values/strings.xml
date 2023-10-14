@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">GiphyDevComposeKoin</string>
+    <string name="title_activity_error">ErrorActivity</string>
+</resources>
