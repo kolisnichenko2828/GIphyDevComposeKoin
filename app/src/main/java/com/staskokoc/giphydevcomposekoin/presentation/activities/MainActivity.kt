@@ -1,10 +1,10 @@
-package com.staskokoc.giphydevcomposekoin.ui.activities
+package com.staskokoc.giphydevcomposekoin.presentation.activities
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.staskokoc.giphydevcomposekoin.ui.screens.GifsScreen
+import com.staskokoc.giphydevcomposekoin.presentation.navigation.NavGraph
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.system.exitProcess
 
@@ -13,10 +13,9 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         disableCrashApp()
         setContent {
-            GifsScreen(vm = vm)
+            NavGraph()
         }
     }
 

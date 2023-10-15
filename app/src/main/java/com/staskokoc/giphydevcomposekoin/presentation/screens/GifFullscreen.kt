@@ -1,8 +1,7 @@
-package com.staskokoc.giphydevcomposekoin.ui.screens
+package com.staskokoc.giphydevcomposekoin.presentation.screens
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -15,16 +14,15 @@ import com.staskokoc.giphydevcomposekoin.R
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun ListGif(url: String) {
+fun GifFullscreenCompose(url: String) {
     GlideImage(
         model = url,
         loading = placeholder(R.drawable.ic_launcher_foreground),
         failure = placeholder(R.drawable.ic_launcher_foreground),
         contentDescription = "gif",
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .aspectRatio(1f)
-            .padding(top = 4.dp)
-            .clickable { /* open new activity */ },
+            .padding(top = 4.dp),
         contentScale = ContentScale.Crop)
 }

@@ -1,4 +1,4 @@
-package com.staskokoc.giphydevcomposekoin.ui.theme
+package com.staskokoc.giphydevcomposekoin.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 

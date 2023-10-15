@@ -52,6 +52,8 @@ android {
 
 dependencies {
 
+    // navigation for compose
+    implementation("androidx.navigation:navigation-compose:2.7.4")
     // livedata for compose
     implementation("androidx.compose.runtime:runtime-livedata:1.5.2")
     // glide

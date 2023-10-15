@@ -1,4 +1,4 @@
-package com.staskokoc.giphydevcomposekoin.ui.activities
+package com.staskokoc.giphydevcomposekoin.presentation.activities
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

@@ -1,4 +1,4 @@
-package com.staskokoc.giphydevcomposekoin.ui.screens
+package com.staskokoc.giphydevcomposekoin.presentation.screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -21,14 +21,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.staskokoc.giphydevcomposekoin.ui.activities.MainViewModel
+import com.staskokoc.giphydevcomposekoin.presentation.activities.MainViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 // @Preview(showSystemUi = true)
 @OptIn(ExperimentalMaterial3Api::class)
-fun GifsScreen(vm: MainViewModel) {
-    val searchText = remember { mutableStateOf("") }
+fun GifsScreenCompose(onClick: (String) -> Unit) {
+    val vm: MainViewModel = koinViewModel()
     val gifs = vm.liveDataGifs.observeAsState()
+    val searchText = remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier.fillMaxSize().padding(top = 4.dp, start = 4.dp, end = 4.dp)
@@ -63,7 +65,7 @@ fun GifsScreen(vm: MainViewModel) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             gifs.value?.let {
                 items(it.listOfUrls) { url ->
-                    ListGif(url = url)
+                    ListGifCompose(url = url, onClick = onClick)
                 }
             }
         }

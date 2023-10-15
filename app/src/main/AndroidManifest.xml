@@ -16,12 +16,12 @@
         android:theme="@style/Theme.GiphyDevComposeKoin"
         tools:targetApi="34">
         <activity
-            android:name=".ui.activities.ErrorActivity"
+            android:name=".presentation.activities.ErrorActivity"
             android:exported="false"
             android:label="@string/title_activity_error"
             android:theme="@style/Theme.GiphyDevComposeKoin" />
         <activity
-            android:name=".ui.activities.MainActivity"
+            android:name=".presentation.activities.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.GiphyDevComposeKoin">
             <intent-filter>

@@ -1,6 +1,6 @@
 package com.staskokoc.giphydevcomposekoin.di
 
-import com.staskokoc.giphydevcomposekoin.ui.activities.MainViewModel
+import com.staskokoc.giphydevcomposekoin.presentation.activities.MainViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
