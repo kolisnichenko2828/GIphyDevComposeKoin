@@ -89,10 +89,10 @@ fun GiphyDevComposeKoinTheme(
         content = content
     )
 
-    val systemUiController = rememberSystemUiController()
-    if (!useDarkTheme) {
-        systemUiController.setStatusBarColor(color = Color.White)
-    } else {
-        systemUiController.setStatusBarColor(color = Color.Black)
-    }
+//    val systemUiController = rememberSystemUiController()
+//    if (!useDarkTheme) {
+//        systemUiController.setStatusBarColor(color = Color.White)
+//    } else {
+//        systemUiController.setStatusBarColor(color = Color.Black)
+//    }
 }
