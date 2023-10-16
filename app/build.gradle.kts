@@ -52,10 +52,12 @@ android {
 
 dependencies {
 
+    // system bars customization
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
     // navigation for compose
     implementation("androidx.navigation:navigation-compose:2.7.4")
     // livedata for compose
-    implementation("androidx.compose.runtime:runtime-livedata:1.5.2")
+    implementation("androidx.compose.runtime:runtime-livedata:1.5.3")
     // glide
     implementation("com.github.bumptech.glide:compose:1.0.0-beta01")
     // retrofit, okhttp

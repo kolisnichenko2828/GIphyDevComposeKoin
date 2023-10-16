@@ -1,8 +1,10 @@
 package com.staskokoc.giphydevcomposekoin.presentation.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -21,6 +23,7 @@ fun GifFullscreenCompose(url: String) {
         failure = placeholder(R.drawable.ic_launcher_foreground),
         contentDescription = "gif",
         modifier = Modifier
+            .background(color = MaterialTheme.colorScheme.surface)
             .fillMaxSize()
             .aspectRatio(1f)
             .padding(top = 4.dp),
