@@ -1,1 +1,1 @@
-Android 7.0+
+Android 8.0+
