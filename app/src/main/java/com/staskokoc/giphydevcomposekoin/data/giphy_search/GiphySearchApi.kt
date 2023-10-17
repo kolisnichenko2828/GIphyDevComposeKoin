@@ -1,6 +1,5 @@
-package com.staskokoc.giphydevcomposekoin.data
+package com.staskokoc.giphydevcomposekoin.data.giphy_search
 
-import com.staskokoc.giphydevcomposekoin.data.models.GifsDto
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.cio.CIO
@@ -9,7 +8,7 @@ import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-class GiphyApi {
+class GiphySearchApi {
     suspend fun getGifsDto(
         apiKey: String,
         q: String,

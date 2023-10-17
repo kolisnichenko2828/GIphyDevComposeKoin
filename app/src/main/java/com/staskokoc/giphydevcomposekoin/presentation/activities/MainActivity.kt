@@ -10,7 +10,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.system.exitProcess
 
 class MainActivity : ComponentActivity() {
-   private val vm by viewModel<MainViewModel>()
+   // private val vm by viewModel<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

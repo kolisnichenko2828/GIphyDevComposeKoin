@@ -37,6 +37,7 @@ import org.koin.androidx.compose.koinViewModel
 @Preview(showSystemUi = true)
 fun GifsScreenCompose(onClick: (String) -> Unit = {}) {
     val vm: MainViewModel = koinViewModel()
+    if(vm.gifsLiveData.value == null) { vm.getTrendingGifs() }
     val gifsState = vm.gifsLiveData.observeAsState()
     val searchText = remember { mutableStateOf("") }
     val focusManager = LocalFocusManager.current
@@ -59,21 +60,45 @@ fun GifsScreenCompose(onClick: (String) -> Unit = {}) {
                     .fillMaxWidth(0.7F)
                     .height(60.dp),
                 value = searchText.value,
-                onValueChange = { value -> searchText.value = value },
+                onValueChange = { v ->
+                    if(v.isEmpty()) {
+                        searchText.value = v
+                    } else if(v.isNotEmpty() && v[v.length - 1] == '\n' && v[0] != ' ' && v[0] != '\n') {
+                        searchText.value = v
+                        focusManager.clearFocus()
+                        vm.getGifs(q = searchText.value)
+                    } else if(v.isNotEmpty() && v[0] != ' ' && v[0] != '\n') {
+                        searchText.value = v
+                    } else if(v.isNotEmpty() && (v[0] == ' ' || v[0] == '\n')) {
+                        searchText.value = ""
+                    }
+                },
                 onSearch = {
-                    focusManager.clearFocus()
-                    vm.getGifs(q = searchText.value)
+                    if(searchText.value.isNotEmpty()) {
+                        focusManager.clearFocus()
+                        vm.getGifs(q = searchText.value)
+                    } else if(searchText.value.isEmpty()) {
+                        focusManager.clearFocus()
+                    }
                 }
             )
             OutlinedButton(
-                modifier = Modifier.padding(top = 4.dp).fillMaxWidth().height(60.dp),
+                modifier = Modifier
+                    .padding(top = 4.dp)
+                    .fillMaxWidth()
+                    .height(60.dp),
                 shape = RoundedCornerShape(4.dp),
                 onClick = {
-                    focusManager.clearFocus()
-                    vm.getGifs(q = searchText.value)
+                    if(searchText.value.isNotEmpty()) {
+                        focusManager.clearFocus()
+                        vm.getGifs(q = searchText.value)
+                    }
                 }
             ) {
-                Text(text = "search", style = TextStyle(fontSize = 18.sp))
+                Text(
+                    text = "search",
+                    style = TextStyle(fontSize = 18.sp)
+                )
             }
         }
         LazyVerticalGrid(

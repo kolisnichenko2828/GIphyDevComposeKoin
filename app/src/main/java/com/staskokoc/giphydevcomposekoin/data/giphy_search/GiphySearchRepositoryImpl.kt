@@ -1,9 +1,9 @@
-package com.staskokoc.giphydevcomposekoin.data
+package com.staskokoc.giphydevcomposekoin.data.giphy_search
 
-import com.staskokoc.giphydevcomposekoin.domain.GiphyRepository
+import com.staskokoc.giphydevcomposekoin.domain.repositories.GiphySearchRepository
 import com.staskokoc.giphydevcomposekoin.domain.models.Gifs
 
-class GiphyRepositoryImpl(val giphyApi: GiphyApi): GiphyRepository {
+class GiphySearchRepositoryImpl(val giphySearchApi: GiphySearchApi): GiphySearchRepository {
     private val api_key: String = "Ktli4o48X9FnJCb9Npp7qEg8Df8B1zXM"
     private var limit: Int = 50
     private var offset: Int = 0
@@ -11,13 +11,15 @@ class GiphyRepositoryImpl(val giphyApi: GiphyApi): GiphyRepository {
     private var lang: String = "en"
 
     override suspend fun getGifs(q: String): Gifs {
-        val gifsDto = giphyApi.getGifsDto(
+        val formattedQ = q.replace(" ", "+")
+        val gifsDto = giphySearchApi.getGifsDto(
             apiKey = api_key,
-            q = q,
+            q = formattedQ,
             limit = limit,
             offset = offset,
             rating = rating,
-            lang = lang)
+            lang = lang
+        )
         val gifs = gifsDto.gifsDtoToGifs()
 
         return gifs

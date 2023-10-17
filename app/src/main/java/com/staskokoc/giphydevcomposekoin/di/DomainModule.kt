@@ -1,11 +1,16 @@
 package com.staskokoc.giphydevcomposekoin.di
 
-import com.staskokoc.giphydevcomposekoin.domain.usecases.GetGifsUsecase
+import com.staskokoc.giphydevcomposekoin.domain.usecases.SearchGifsUsecase
+import com.staskokoc.giphydevcomposekoin.domain.usecases.GetTrendingGifsUsecase
 import org.koin.dsl.module
 
 val domainModule = module {
 
-    factory<GetGifsUsecase> {
-        GetGifsUsecase(giphyRepository = get())
+    factory<SearchGifsUsecase> {
+        SearchGifsUsecase(giphySearchRepository = get())
+    }
+
+    factory<GetTrendingGifsUsecase> {
+        GetTrendingGifsUsecase(giphyTrendingRepository = get())
     }
 }

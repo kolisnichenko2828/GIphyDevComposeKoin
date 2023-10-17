@@ -64,6 +64,3 @@ fun SearchBarCompose(
 //        },
     )
 }
-
-//onQueryChange = { text -> searchText.value = text },
-//onSearch = { text -> vm.getGifs(q = text) },
