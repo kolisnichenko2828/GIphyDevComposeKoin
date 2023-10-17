@@ -1,6 +1,7 @@
 package com.staskokoc.giphydevcomposekoin.presentation.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
@@ -32,10 +35,9 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 @Preview(showSystemUi = true)
-@OptIn(ExperimentalMaterial3Api::class)
 fun GifsScreenCompose(onClick: (String) -> Unit = {}) {
     val vm: MainViewModel = koinViewModel()
-    val gifs = vm.liveDataGifs.observeAsState()
+    val gifsState = vm.gifsLiveData.observeAsState()
     val searchText = remember { mutableStateOf("") }
     val focusManager = LocalFocusManager.current
 
@@ -66,7 +68,6 @@ fun GifsScreenCompose(onClick: (String) -> Unit = {}) {
             OutlinedButton(
                 modifier = Modifier.padding(top = 4.dp).fillMaxWidth().height(60.dp),
                 shape = RoundedCornerShape(4.dp),
-                // textStyle = TextStyle(fontSize = 18.sp),
                 onClick = {
                     focusManager.clearFocus()
                     vm.getGifs(q = searchText.value)
@@ -75,16 +76,21 @@ fun GifsScreenCompose(onClick: (String) -> Unit = {}) {
                 Text(text = "search", style = TextStyle(fontSize = 18.sp))
             }
         }
-        LazyColumn(
-            modifier = Modifier
-                .background(color = MaterialTheme.colorScheme.surface)
-                .fillMaxSize()
+        LazyVerticalGrid(
+            columns = GridCells.Adaptive(128.dp),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+            modifier = Modifier.padding(top = 4.dp, bottom = 4.dp)
         ) {
-            gifs.value?.let {
-                items(it.listOfUrls) { url ->
-                    ListGifCompose(url = url, onClick = onClick)
+            gifsState.value?.let {
+                items(it.listOfUrlsPreviewGifs.size) { position ->
+                    ListGifCompose(
+                        url = it.listOfUrlsPreviewGifs[position],
+                        urlLarge = it.listOfUrlsLargeGifs[position],
+                        onClick = onClick)
                 }
             }
+
         }
     }
 }

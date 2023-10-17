@@ -1,5 +1,6 @@
 package com.staskokoc.giphydevcomposekoin.domain.models
 
 class Gifs(
-    val listOfUrls: List<String>
+    val listOfUrlsPreviewGifs: List<String>,
+    val listOfUrlsLargeGifs: List<String>
 )

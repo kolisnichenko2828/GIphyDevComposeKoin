@@ -8,11 +8,11 @@ import com.staskokoc.giphydevcomposekoin.domain.usecases.GetGifsUsecase
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val getGifsUsecase: GetGifsUsecase) : ViewModel() {
-    val liveDataGifs = MutableLiveData<Gifs>()
+    val gifsLiveData = MutableLiveData<Gifs>()
 
     fun getGifs(q: String) {
         viewModelScope.launch {
-            liveDataGifs.value = getGifsUsecase.execute(q)
+            gifsLiveData.value = getGifsUsecase.execute(q)
         }
     }
 }
