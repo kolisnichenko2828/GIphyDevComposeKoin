@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.serialization")
     id("com.google.devtools.ksp")
 }
 
@@ -52,17 +53,19 @@ android {
 
 dependencies {
 
-    // system bars customization
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
+    // ktor
+    implementation("io.ktor:ktor-client-core:2.3.5")
+    implementation("io.ktor:ktor-client-cio:2.3.5")
+    implementation("io.ktor:ktor-client-content-negotiation:2.3.5")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.5")
+    // kotlinx.serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
     // navigation for compose
     implementation("androidx.navigation:navigation-compose:2.7.4")
     // livedata for compose
     implementation("androidx.compose.runtime:runtime-livedata:1.5.3")
     // glide
     implementation("com.github.bumptech.glide:compose:1.0.0-beta01")
-    // retrofit, okhttp
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     // koin
     implementation("io.insert-koin:koin-androidx-compose:3.4.2")
 
