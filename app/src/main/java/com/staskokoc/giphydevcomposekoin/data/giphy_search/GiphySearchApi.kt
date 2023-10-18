@@ -1,5 +1,6 @@
 package com.staskokoc.giphydevcomposekoin.data.giphy_search
 
+import com.staskokoc.giphydevcomposekoin.data.giphy_search.models.GifsDto
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.cio.CIO

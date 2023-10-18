@@ -1,5 +1,6 @@
 package com.staskokoc.giphydevcomposekoin.data.giphy_trending
 
+import com.staskokoc.giphydevcomposekoin.data.giphy_trending.models.GifsTrendingDto
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.cio.CIO

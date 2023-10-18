@@ -1,4 +1,4 @@
-package com.staskokoc.giphydevcomposekoin.data.giphy_trending
+package com.staskokoc.giphydevcomposekoin.data.giphy_trending.models
 
 import com.staskokoc.giphydevcomposekoin.domain.models.Gifs
 import kotlinx.serialization.Serializable

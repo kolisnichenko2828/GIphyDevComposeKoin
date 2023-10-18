@@ -19,3 +19,7 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class com.staskokoc.giphydevcomposekoin.data.giphy_search.models.*
+-keep class com.staskokoc.giphydevcomposekoin.data.giphy_trending.models.*
+-dontwarn org.slf4j.impl.StaticLoggerBinder
