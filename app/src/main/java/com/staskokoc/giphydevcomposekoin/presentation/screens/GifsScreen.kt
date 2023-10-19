@@ -8,18 +8,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -37,10 +33,13 @@ import org.koin.androidx.compose.koinViewModel
 @Preview(showSystemUi = true)
 fun GifsScreenCompose(onClick: (String) -> Unit = {}) {
     val vm: MainViewModel = koinViewModel()
-    if(vm.gifsLiveData.value == null) { vm.getTrendingGifs() }
     val gifsState = vm.gifsLiveData.observeAsState()
     val searchText = remember { mutableStateOf("") }
     val focusManager = LocalFocusManager.current
+
+    if(vm.gifsLiveData.value == null) { vm.getLastGifsModel() }
+    if(vm.gifsLiveData.value == null) { vm.getTrendingGifs() }
+    LaunchedEffect(gifsState.value) { vm.saveLastGifsModel() }
 
     Column(
         modifier = Modifier

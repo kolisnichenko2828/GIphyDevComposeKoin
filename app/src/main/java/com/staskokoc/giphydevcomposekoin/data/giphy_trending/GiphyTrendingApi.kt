@@ -7,9 +7,11 @@ import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 
 class GiphyTrendingApi {
+    @OptIn(ExperimentalSerializationApi::class)
     suspend fun getTrendingGifsDto(
         apiKey: String,
         limit: Int,
@@ -19,7 +21,10 @@ class GiphyTrendingApi {
 
         val client = HttpClient(CIO) {
             install(ContentNegotiation) {
-                json(Json { ignoreUnknownKeys = true })
+                json(Json {
+                    ignoreUnknownKeys = true
+                    explicitNulls = false
+                })
             }
         }
 
