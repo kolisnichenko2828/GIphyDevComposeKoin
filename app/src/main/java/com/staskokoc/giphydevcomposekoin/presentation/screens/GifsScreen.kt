@@ -18,7 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextStyle
@@ -34,12 +34,19 @@ import org.koin.androidx.compose.koinViewModel
 fun GifsScreenCompose(onClick: (String) -> Unit = {}) {
     val vm: MainViewModel = koinViewModel()
     val gifsState = vm.gifsLiveData.observeAsState()
-    val searchText = remember { mutableStateOf("") }
+    val searchText = rememberSaveable { mutableStateOf("") }
+    val lastSearchState = vm.lastSearchLiveData.observeAsState()
     val focusManager = LocalFocusManager.current
 
-    if(vm.gifsLiveData.value == null) { vm.getLastGifsModel() }
-    if(vm.gifsLiveData.value == null) { vm.getTrendingGifs() }
-    LaunchedEffect(gifsState.value) { vm.saveLastGifsModel() }
+    LaunchedEffect(Unit) {
+        vm.getLastSearch()
+        if(lastSearchState.value == null || lastSearchState.value == "") {
+            vm.getTrendingGifs()
+        } else {
+            searchText.value = lastSearchState.value!!
+            vm.getGifs(q = searchText.value)
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -62,23 +69,24 @@ fun GifsScreenCompose(onClick: (String) -> Unit = {}) {
                 onValueChange = { v ->
                     if(v.isEmpty()) {
                         searchText.value = v
-                    } else if(v.isNotEmpty() && v[v.length - 1] == '\n' && v[0] != ' ' && v[0] != '\n') {
+                    } else if(v.isNotEmpty() && v.last() == '\n' && v.first() != ' ' &&
+                        v.first() != '\n') {
                         searchText.value = v
                         focusManager.clearFocus()
                         vm.getGifs(q = searchText.value)
-                    } else if(v.isNotEmpty() && v[0] != ' ' && v[0] != '\n') {
-                        searchText.value = v
-                    } else if(v.isNotEmpty() && (v[0] == ' ' || v[0] == '\n')) {
+                        vm.saveLastSearch(lastSearch = searchText.value)
+                    } else if(v.isNotEmpty() && (v.first() == ' ' || v.first() == '\n')) {
                         searchText.value = ""
+                    } else {
+                        searchText.value = v
                     }
                 },
                 onSearch = {
                     if(searchText.value.isNotEmpty()) {
-                        focusManager.clearFocus()
                         vm.getGifs(q = searchText.value)
-                    } else if(searchText.value.isEmpty()) {
-                        focusManager.clearFocus()
+                        vm.saveLastSearch(lastSearch = searchText.value)
                     }
+                    focusManager.clearFocus()
                 }
             )
             OutlinedButton(
@@ -91,6 +99,7 @@ fun GifsScreenCompose(onClick: (String) -> Unit = {}) {
                     if(searchText.value.isNotEmpty()) {
                         focusManager.clearFocus()
                         vm.getGifs(q = searchText.value)
+                        vm.saveLastSearch(lastSearch = searchText.value)
                     }
                 }
             ) {

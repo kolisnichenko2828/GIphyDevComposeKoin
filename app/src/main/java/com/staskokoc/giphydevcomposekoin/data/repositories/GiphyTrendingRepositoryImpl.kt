@@ -1,5 +1,6 @@
-package com.staskokoc.giphydevcomposekoin.data.giphy_trending
+package com.staskokoc.giphydevcomposekoin.data.repositories
 
+import com.staskokoc.giphydevcomposekoin.data.api.GiphyTrendingApi
 import com.staskokoc.giphydevcomposekoin.domain.models.Gifs
 import com.staskokoc.giphydevcomposekoin.domain.repositories.GiphyTrendingRepository
 
@@ -11,14 +12,14 @@ class GiphyTrendingRepositoryImpl(val giphyTrendingApi: GiphyTrendingApi): Giphy
     private var bundle: String = "messaging_non_clips"
 
     override suspend fun getTrendingGifs(): Gifs {
-        val gifsDto = giphyTrendingApi.getTrendingGifsDto(
+        val giphyDto = giphyTrendingApi.getTrendingGifsDto(
             apiKey = api_key,
             limit = limit,
             offset = offset,
             rating = rating,
             bundle = bundle
         )
-        val gifs = gifsDto.gifsDtoToGifs()
+        val gifs = giphyDto.giphyDtoToGifs()
 
         return gifs
     }

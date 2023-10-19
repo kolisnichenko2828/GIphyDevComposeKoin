@@ -10,8 +10,8 @@ val appModule = module {
         MainViewModel(
             searchGifsUsecase = get(),
             getTrendingGifsUsecase = get(),
-            getGifsUrlsSharedPrefsUsecase = get(),
-            saveGifsUrlsSharedPrefsUsecase = get()
+            getLastSearchSharedPrefsUsecase = get(),
+            saveLastSearchSharedPrefsUsecase = get()
         )
     }
 }

@@ -1,6 +1,6 @@
-package com.staskokoc.giphydevcomposekoin.data.giphy_trending
+package com.staskokoc.giphydevcomposekoin.data.api
 
-import com.staskokoc.giphydevcomposekoin.data.giphy_trending.models.GifsTrendingDto
+import com.staskokoc.giphydevcomposekoin.data.models.GiphyDto
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.cio.CIO
@@ -10,14 +10,15 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 
-class GiphyTrendingApi {
+class GiphySearchApi {
     @OptIn(ExperimentalSerializationApi::class)
-    suspend fun getTrendingGifsDto(
+    suspend fun getGifsDto(
         apiKey: String,
+        q: String,
         limit: Int,
         offset: Int,
         rating: String,
-        bundle: String): GifsTrendingDto {
+        lang: String): GiphyDto {
 
         val client = HttpClient(CIO) {
             install(ContentNegotiation) {
@@ -28,15 +29,16 @@ class GiphyTrendingApi {
             }
         }
 
-        val url = "https://api.giphy.com/v1/gifs/trending?" +
+        val url = "https://api.giphy.com/v1/gifs/search?" +
                 "api_key=$apiKey" +
+                "&q=$q" +
                 "&limit=$limit" +
                 "&offset=$offset" +
                 "&rating=$rating" +
-                "&bundle=$bundle"
+                "&lang=$lang"
 
-        val gifsTrendingDto: GifsTrendingDto = client.get(url).body()
+        val giphyDto: GiphyDto = client.get(url).body()
 
-        return gifsTrendingDto
+        return giphyDto
     }
 }

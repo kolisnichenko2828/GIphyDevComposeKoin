@@ -7,6 +7,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
+import com.staskokoc.giphydevcomposekoin.presentation.theme.GiphyDevComposeKoinTheme
 
 class ErrorActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,10 +18,12 @@ class ErrorActivity : ComponentActivity() {
         val stackTrace = intent.getStringExtra("stackTrace")
 
         setContent {
-            Text(
-                modifier = Modifier.verticalScroll(rememberScrollState()),
-                text = "Message: ${message}\n\nCause: ${cause}\n\nStacktrace: ${stackTrace}"
-            )
+            GiphyDevComposeKoinTheme() {
+                Text(
+                    modifier = Modifier.verticalScroll(rememberScrollState()),
+                    text = "Message: ${message}\n\nCause: ${cause}\n\nStacktrace: ${stackTrace}"
+                )
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.staskokoc.giphydevcomposekoin.data.giphy_trending.models
+package com.staskokoc.giphydevcomposekoin.data.models
 
 import com.staskokoc.giphydevcomposekoin.domain.models.Gifs
 import kotlinx.serialization.Serializable
@@ -13,8 +13,8 @@ data class FixedHeightSmall(val url: String?)
 data class Original(val url: String)
 
 @Serializable
-data class GifsTrendingDto(val `data`: List<Data>) {
-    fun gifsDtoToGifs(): Gifs {
+data class GiphyDto(val `data`: List<Data>) {
+    fun giphyDtoToGifs(): Gifs {
         val urlsPreview = data.map {
             it.images.fixed_height_small?.url ?: it.images.original.url
         }

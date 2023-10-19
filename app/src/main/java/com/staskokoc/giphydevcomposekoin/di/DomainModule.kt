@@ -1,9 +1,9 @@
 package com.staskokoc.giphydevcomposekoin.di
 
-import com.staskokoc.giphydevcomposekoin.domain.usecases.GetGifsUrlsSharedPrefsUsecase
+import com.staskokoc.giphydevcomposekoin.domain.usecases.GetLastSearchSharedPrefsUsecase
 import com.staskokoc.giphydevcomposekoin.domain.usecases.SearchGifsUsecase
 import com.staskokoc.giphydevcomposekoin.domain.usecases.GetTrendingGifsUsecase
-import com.staskokoc.giphydevcomposekoin.domain.usecases.SaveGifsUrlsSharedPrefsUsecase
+import com.staskokoc.giphydevcomposekoin.domain.usecases.SaveLastSearchSharedPrefsUsecase
 import org.koin.dsl.module
 
 val domainModule = module {
@@ -16,11 +16,11 @@ val domainModule = module {
         GetTrendingGifsUsecase(giphyTrendingRepository = get())
     }
 
-    factory<GetGifsUrlsSharedPrefsUsecase> {
-        GetGifsUrlsSharedPrefsUsecase(giphySharedPrefRepository = get())
+    factory<GetLastSearchSharedPrefsUsecase> {
+        GetLastSearchSharedPrefsUsecase(giphySharedPrefRepository = get())
     }
 
-    factory<SaveGifsUrlsSharedPrefsUsecase> {
-        SaveGifsUrlsSharedPrefsUsecase(giphySharedPrefRepository = get())
+    factory<SaveLastSearchSharedPrefsUsecase> {
+        SaveLastSearchSharedPrefsUsecase(giphySharedPrefRepository = get())
     }
 }

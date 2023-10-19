@@ -4,29 +4,30 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.staskokoc.giphydevcomposekoin.domain.models.Gifs
-import com.staskokoc.giphydevcomposekoin.domain.usecases.GetGifsUrlsSharedPrefsUsecase
+import com.staskokoc.giphydevcomposekoin.domain.usecases.GetLastSearchSharedPrefsUsecase
 import com.staskokoc.giphydevcomposekoin.domain.usecases.SearchGifsUsecase
 import com.staskokoc.giphydevcomposekoin.domain.usecases.GetTrendingGifsUsecase
-import com.staskokoc.giphydevcomposekoin.domain.usecases.SaveGifsUrlsSharedPrefsUsecase
+import com.staskokoc.giphydevcomposekoin.domain.usecases.SaveLastSearchSharedPrefsUsecase
 import kotlinx.coroutines.launch
 
 class MainViewModel(
     private val searchGifsUsecase: SearchGifsUsecase,
     private val getTrendingGifsUsecase: GetTrendingGifsUsecase,
-    private val getGifsUrlsSharedPrefsUsecase: GetGifsUrlsSharedPrefsUsecase,
-    private val saveGifsUrlsSharedPrefsUsecase: SaveGifsUrlsSharedPrefsUsecase
+    private val getLastSearchSharedPrefsUsecase: GetLastSearchSharedPrefsUsecase,
+    private val saveLastSearchSharedPrefsUsecase: SaveLastSearchSharedPrefsUsecase
 ) : ViewModel() {
     val gifsLiveData = MutableLiveData<Gifs>()
+    val lastSearchLiveData = MutableLiveData<String>()
 
-    fun getLastGifsModel() {
+    fun getLastSearch() {
         viewModelScope.launch {
-            gifsLiveData.value = getGifsUrlsSharedPrefsUsecase.execute()
+            lastSearchLiveData.value = getLastSearchSharedPrefsUsecase.execute()
         }
     }
 
-    fun saveLastGifsModel() {
+    fun saveLastSearch(lastSearch: String) {
         viewModelScope.launch {
-            saveGifsUrlsSharedPrefsUsecase.execute(gifs = gifsLiveData.value)
+            saveLastSearchSharedPrefsUsecase.execute(lastSearch = lastSearch)
         }
     }
 

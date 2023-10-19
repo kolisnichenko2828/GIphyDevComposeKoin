@@ -1,10 +1,10 @@
 package com.staskokoc.giphydevcomposekoin.di
 
-import com.staskokoc.giphydevcomposekoin.data.giphy_search.GiphySearchApi
-import com.staskokoc.giphydevcomposekoin.data.giphy_search.GiphySearchRepositoryImpl
-import com.staskokoc.giphydevcomposekoin.data.giphy_sharedpref.GiphySharedPrefRepositoryImpl
-import com.staskokoc.giphydevcomposekoin.data.giphy_trending.GiphyTrendingApi
-import com.staskokoc.giphydevcomposekoin.data.giphy_trending.GiphyTrendingRepositoryImpl
+import com.staskokoc.giphydevcomposekoin.data.api.GiphySearchApi
+import com.staskokoc.giphydevcomposekoin.data.repositories.GiphySearchRepositoryImpl
+import com.staskokoc.giphydevcomposekoin.data.repositories.GiphySharedPrefRepositoryImpl
+import com.staskokoc.giphydevcomposekoin.data.api.GiphyTrendingApi
+import com.staskokoc.giphydevcomposekoin.data.repositories.GiphyTrendingRepositoryImpl
 import com.staskokoc.giphydevcomposekoin.domain.repositories.GiphySearchRepository
 import com.staskokoc.giphydevcomposekoin.domain.repositories.GiphySharedPrefRepository
 import com.staskokoc.giphydevcomposekoin.domain.repositories.GiphyTrendingRepository
