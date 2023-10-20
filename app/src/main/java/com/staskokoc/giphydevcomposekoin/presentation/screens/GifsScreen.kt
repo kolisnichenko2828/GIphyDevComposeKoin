@@ -31,8 +31,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 @Preview(showSystemUi = true)
-fun GifsScreenCompose(onClick: (String) -> Unit = {}) {
-    val vm: MainViewModel = koinViewModel()
+fun GifsScreenCompose(vm: MainViewModel = koinViewModel(), onClick: (String) -> Unit = {}) {
     val gifsState = vm.gifsLiveData.observeAsState()
     val searchText = rememberSaveable { mutableStateOf("") }
     val lastSearchState = vm.lastSearchLiveData.observeAsState()

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.ui.platform.LocalContext
 import com.staskokoc.giphydevcomposekoin.presentation.navigation.NavGraph
 import com.staskokoc.giphydevcomposekoin.presentation.theme.GiphyDevComposeKoinTheme
 import kotlin.system.exitProcess
@@ -13,9 +14,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         disableCrashApp()
+        val connectivityLiveData = ConnectivityLiveData(applicationContext)
         setContent {
             GiphyDevComposeKoinTheme {
-                NavGraph()
+                NavGraph(connectivityLiveData)
             }
         }
     }
