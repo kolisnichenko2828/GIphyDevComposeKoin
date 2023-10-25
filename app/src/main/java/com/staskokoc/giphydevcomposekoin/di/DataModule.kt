@@ -16,12 +16,12 @@ val dataModule = module {
         GiphySearchApi()
     }
 
-    single<GiphySearchRepository> {
-        GiphySearchRepositoryImpl(giphySearchApi = get())
-    }
-
     single<GiphyTrendingApi> {
         GiphyTrendingApi()
+    }
+
+    single<GiphySearchRepository> {
+        GiphySearchRepositoryImpl(giphySearchApi = get())
     }
 
     single<GiphyTrendingRepository> {
