@@ -16,6 +16,7 @@ Images are uploaded in two different ways:
 - ktor
 - glide
 - coroutines
+- shared preferences
 - navigation
 - internet connectivity check
 - input text validation
