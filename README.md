@@ -1,4 +1,4 @@
-# GiphyDev
+# GiphyDevComposeKoin
 Android 8.0+
 
 ## Application Description
